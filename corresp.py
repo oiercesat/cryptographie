@@ -22,3 +22,19 @@ def recupereLettre(nombre, dico):
     for lettre in dico:
         if (dico[lettre]==nombre):
             return lettre
+        
+def chiffreCesar(message,cle,alpha):
+    resultat=""
+    dic=corresp(alpha)
+    for lettre in message:
+        numero=(dic[lettre]+cle)%len(alpha)
+        resultat+=recupereLettre(numero, dic)
+    return resultat
+
+def deChiffreCesar(message,cle,alpha):
+    resultat=""
+    dic=corresp(alpha)
+    for lettre in message:
+        numero=(dic[lettre]-cle)%len(alpha)
+        resultat+=recupereLettre(numero, dic)
+    return resultat
