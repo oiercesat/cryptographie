@@ -34,7 +34,7 @@ def recupereLettre(nombre, dico):
 #---------------------Fonction de cryptage avec l'algorithme de César---------------------
 
 
-#Cryptage de César prenant en parametre le message la cle (le decalage) et l'alphabet utilisé
+#Cryptage de Cesar prenant en parametre le message la cle (le decalage) et l'alphabet utilisé
 
 def chiffreCesar(message,cle,alpha):
     resultat=""
@@ -45,7 +45,7 @@ def chiffreCesar(message,cle,alpha):
     return resultat
 
 
-#Decryptage de César prenant en parametre le message la cle (le decalage) et l'alphabet utilisé
+#Decryptage de Cesar prenant en parametre le message la cle (le decalage) et l'alphabet utilise
 
 def deChiffreCesar(message,cle,alpha):
     resultat=""
@@ -55,32 +55,47 @@ def deChiffreCesar(message,cle,alpha):
         resultat+=recupereLettre(numero, dic)
     return resultat
 
-#--------------------- Euclide étendu ---------------------
+#--------------------- Euclide etendu ---------------------
 
 def euclide_etendu(nombre1,nombre2):
-    r0=nombre1
-    r1=nombre2
-    r=0
-    u0=1
-    v0=0
-    u1=0
-    v1=1
-    u=0
-    v=0
+    
+    # Les restes
+    r0=nombre1  # reste initialise avec le premier nombre qui sera uitlise comme Rn-2
+    r1=nombre2  # reste initialise avec le deuxieme nombre qui sera uitlise comme Rn-1
+    r=0         # reste initialise a 0 nombre qui sera uitlise comme Rn
+    
+    # Coefficent de Bezout
+    
+    #Initialisation des coefficients u
+    u0=1        #coefficent u de la premiere etape 
+    u1=0        #coefficent u de la deuxieme etape
+    u=0         #coefficent u de l'etape n
+    
+    #Initialisation des coefficients v
+    v0=0        #coefficent v de la premiere etape
+    v1=1        #coefficent v de la deuxieme etape
+    v=0         #coefficent v de l'etape n
     
     while (r1!=0):
         
-        r=r0%r1
-        q=r0//r1
-        u=u0-q*u1
-        v=v0-q*v1
-        r0=r1
-        r1=r
-        u0=u1
-        u1=u
-        v0=v1
-        v1=v
-        print(r,q,u,v,r0,r1)
+        # Calculs 
+        r=r0%r1         #calcule le reste de la division euclidienne 
+        q=r0//r1        #calcule le quotient de la divion euclidienne
+        u=u0-q*u1       #calcule le coefficient Un grace à Un-2 et Un-1
+        v=v0-q*v1       #calcule le coefficient Un grace à Vn-2 et Vn-1
+        
+        # Affectation des nouvelles valeurs
+        # les reste
+        r0=r1           #Rn-2 prend la valeure de Rn-1
+        r1=r            #Rn-1 prend la valeure de Rn
+        
+        # Les coefficients U
+        u0=u1           #Un-2 prend la valeure de Un-1
+        u1=u            #Un-1 prend la valeure de Un
+        
+        # Les coefficents V
+        v0=v1           #Vn-2 prend la valeure de Vn-1
+        v1=v            #Vn-1 prend la valeure de Vn
         
     return r0,u0,v0
     
