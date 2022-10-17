@@ -67,11 +67,22 @@ def euclide_etendu(nombre1,nombre2):
     v1=1
     u=0
     v=0
-    r=r0%r1
-    q=r0//r1
-    u=u0-q*u1
-    v=v0-q*v1
-    return r,q,u,v
+    
+    while (r1!=0):
+        
+        r=r0%r1
+        q=r0//r1
+        u=u0-q*u1
+        v=v0-q*v1
+        r0=r1
+        r1=r
+        u0=u1
+        u1=u
+        v0=v1
+        v1=v
+        print(r,q,u,v,r0,r1)
+        
+    return r0,u0,v0
     
     
         
