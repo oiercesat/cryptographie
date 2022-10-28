@@ -97,10 +97,38 @@ def euclide_etendu(nombre1,nombre2):
         v0=v1           #Vn-2 prend la valeure de Vn-1
         v1=v            #Vn-1 prend la valeure de Vn
         
-    return r0,u0,v0
+    resulat=[]
+    resulat.append(r0)
+    resulat.append(u0)
+    resulat.append(v0)
+    return resulat
     
+# --------------------- Chiffrement affine et déchiffrement affine --------------------- 
+
+from collections import Counter
+
+def lettreLesPlusFrequentes(message):
+    c=Counter(message)
+    freq=c.most_common(10)
+    return freq
+
+def inverseMod(nb,mod):
+    inverse=euclide_etendu(nb,mod)
+    return inverse[1]
+
+#Chiffrement affine
+def chiffrementAffine(a,b):
+    return a
+
+#Dechiffrement affine
+def dechiffrementAffine(messageCrypte,a,b):
+    alphaDico=corresp(alpha)
+    resultat=""
     
-        
-        
-        
-        
+    for iterator in range(len(messageCrypte)):
+        j=alphaDico[messageCrypte[iterator]]
+        i=a*j+b
+        i=i%26
+        lettreI=recupereLettre(i,alphaDico)
+        resultat=resultat+lettreI
+    return resultat
