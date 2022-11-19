@@ -107,28 +107,40 @@ def euclide_etendu(nombre1,nombre2):
 
 from collections import Counter
 
+
+#fonction premetant de faire une analyse frequencielle des lettres presente dans le message
 def lettreLesPlusFrequentes(message):
     c=Counter(message)
     freq=c.most_common(10)
     return freq
 
+#permet de calculer l'inverse dans un modulo
 def inverseMod(nb,mod):
     inverse=euclide_etendu(nb,mod)
     return inverse[1]
 
 #Chiffrement affine
-def chiffrementAffine(a,b):
-    return a
+def chiffrementAffine(messageACrypte,a,b):
+    resultat=""
+    alphaDico=corresp(alpha)                        #cree un dico avec la la lettre comme cle et le rang comme valeur
+    
+    for iterator in range(len(messageACrypte)):
+        j=alphaDico[messageACrypte[iterator]]       #recupere le rang de la lettre
+        i=(j-b)*inverseMod(a, 26)                   #fait le calcule inverse de j=ai+b
+        i=i%26                                      #met le resultat modulo 26
+        lettreI=recupereLettre(i,alphaDico)         #recupere la lettre correspondant au rang i que l'ont vient de calculer
+        resultat=resultat+lettreI
+    return resultat
 
 #Dechiffrement affine
 def dechiffrementAffine(messageCrypte,a,b):
-    alphaDico=corresp(alpha)
+    alphaDico=corresp(alpha)                        #cree un dico avec la la lettre comme cle et le rang comme valeur
     resultat=""
     
     for iterator in range(len(messageCrypte)):
-        j=alphaDico[messageCrypte[iterator]]
-        i=a*j+b
-        i=i%26
-        lettreI=recupereLettre(i,alphaDico)
+        j=alphaDico[messageCrypte[iterator]]        #recupere le rang de la lettre
+        i=a*j+b                                     #fait le calcule de j=ai+b
+        i=i%26                                      #met le resultat modulo 26
+        lettreI=recupereLettre(i,alphaDico)         #recupere la lettre correspondant au rang i que l'ont vient de calculer
         resultat=resultat+lettreI
     return resultat
