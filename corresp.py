@@ -140,7 +140,55 @@ def dechiffrementAffine(messageCrypte,a,b):
     for iterator in range(len(messageCrypte)):
         j=alphaDico[messageCrypte[iterator]]        #recupere le rang de la lettre
         i=a*j+b                                     #fait le calcule de j=ai+b
-        i=i%26                                      #met le resultat modulo 26
+        i=i%27                                      #met le resultat modulo 26
         lettreI=recupereLettre(i,alphaDico)         #recupere la lettre correspondant au rang i que l'ont vient de calculer
         resultat=resultat+lettreI
     return resultat
+
+
+#chiffrement Vigenere
+
+
+def chiffrementVigenere (message,cle):
+    
+    resultat=""
+    alphaDico=corresp(alpha)
+    tabCorresp =[]
+    
+    for lettre in cle :
+        tabCorresp.append(alphaDico[lettre])
+    
+    for i in range(0,len(message),len(cle)):
+        if (i+len(cle)<len(message)):
+            for j in range(0,len(cle)):
+                numero=(alphaDico[message[i+j]]+tabCorresp[j])%len(alpha)
+                resultat+=recupereLettre(numero, alphaDico)
+        else :
+            lenRestant=len(message)-i
+            for j in range(0,lenRestant):
+                numero=(alphaDico[message[i+j]]+tabCorresp[j])%len(alpha)
+                resultat+=recupereLettre(numero, alphaDico)
+      
+    print (resultat)
+    
+def dechiffrementVigenere(message,cle):
+    
+    resultat=""
+    alphaDico = corresp(alpha)
+    tabCorresp =[]
+    
+    for lettre in cle :
+        tabCorresp.append(alphaDico[lettre])
+    
+    for i in range(0,len(message),len(cle)):
+        if (i+len(cle)<len(message)):
+            for j in range(0,len(cle)):
+                numero=(alphaDico[message[i+j]]-tabCorresp[j])%len(alpha)
+                resultat+=recupereLettre(numero, alphaDico)
+        else :
+            lenRestant=len(message)-i
+            for j in range(0,lenRestant):
+                numero=(alphaDico[message[i+j]]-tabCorresp[j])%len(alpha)
+                resultat+=recupereLettre(numero, alphaDico)
+    
+    print (resultat)
